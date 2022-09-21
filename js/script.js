@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let trip = distance / 100 * this.fuel_consumption;
             let time = distance / this.avarage_speed;
             let trip_time = (time / 4) + time;
-            alert(`Відстань: ${distance}, витрачений час: ${trip_time}, витрачено палива: ${trip}`);
+            alert(`Відстань: ${distance}, витрачений час: ${Math.round(trip_time)}, витрачено палива: ${trip}`);
         }
     }
     car.carInfo();
@@ -93,7 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             else if(this.minutes >= 60){
                 this.hours += (this.minutes/60);
-                alert(`Час ${Math.round(this.hours)}:${Math.round(this.minutes%60)}:${this.seconds%60}`);
+                if(this.hours < 23){
+                    alert(`Час ${Math.round(this.hours)}:${Math.round(this.minutes%60)}:${this.seconds%60}`);
+                }
+                else if(this.hours >= 24){
+                    this.hours = this.hours % 24;
+                    alert(`Час ${Math.round(this.hours)}:${Math.round(this.minutes%60)}:${this.seconds%60}`);
+                }
+                else return 'error';
             }
             else return 'error';
         },
