@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         avarage_speed: '120',
         tank_volume: '70',
         fuel_consumption: '8',
-        driver_1: 'Андрій',
+        drivers: 'Андрій',
         carInfo() {
             alert(`Інформація про автомобіль: 
             Марка: ${this.maker} 
@@ -24,20 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
             Середня швидкість: ${this.avarage_speed}
             Обсяг паливного баку: ${this.tank_volume}
             Середня витрата палива на 100 км: ${this.fuel_consumption}
-            Водій: ${this.driver_1}`);
+            Водій: ${this.drivers}`);
         },
-        addDriver() {
-            this.driver_2 = prompt('Напишіть ім`я водія якого хотіли б додати до списку');  
-        },
-        findNameDriver(){
-            let find_driver = prompt('Напишіть ім`я водія');
-            if (find_driver == this.driver_1){
-                alert('Водій є у списку');
-            }
-            else if(find_driver == this.driver_2){
-                alert('Водій є у списку');
-            }
-            else alert('Водія немає у списку');
+        addDriver(car, key) {
+            car[key] += ', ' + prompt('Напишіть ім`я водія якого хотіли б додати до списку');
         },
         calculateRoad(){
             let distance = prompt('Скільки потрібно проїхати?');
@@ -48,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     car.carInfo();
-    car.addDriver();
-    car.findNameDriver();
+    car.addDriver(car, 'drivers');
+    car.carInfo();
     car.calculateRoad();
 
 //normal
