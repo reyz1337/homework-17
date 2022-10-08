@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fuel_consumption: '8',
         drivers: 'Андрій',
         carInfo() {
-            alert(`Інформація про автомобіль: 
+            return(`Інформація про автомобіль: 
             Марка: ${this.maker} 
             Модель: ${this.model}
             Рік випуску: ${this.year} 
@@ -26,21 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
             Середня витрата палива на 100 км: ${this.fuel_consumption}
             Водій: ${this.drivers}`);
         },
-        addDriver(car, key) {
-            car[key] += ', ' + prompt('Напишіть ім`я водія якого хотіли б додати до списку');
+        addDriver(key) {
+            let driver = +prompt('Введіть кількість водіїв яких хочете додати');
+            for(let i = 0; i < driver; i++){
+                car[key] += ', ' + prompt('Напишіть ім`я водія якого хотіли б додати до списку');
+            }
+            return `Водії ${this.drivers}`;
         },
         calculateRoad(){
             let distance = prompt('Скільки потрібно проїхати?');
             let trip = distance / 100 * this.fuel_consumption;
             let time = distance / this.avarage_speed;
             let trip_time = (time / 4) + time;
-            alert(`Відстань: ${distance}, витрачений час: ${Math.round(trip_time)}, витрачено палива: ${trip}`);
+           return (`Відстань: ${distance}, витрачений час: ${Math.round(trip_time)}, витрачено палива: ${trip}`);
         }
     }
-    car.carInfo();
-    car.addDriver(car, 'drivers');
-    car.carInfo();
-    car.calculateRoad();
+    alert(car.carInfo());
+    alert(car.addDriver('drivers'));
+    alert(car.calculateRoad());
+
 
 //normal
 //1 Створити об'єкт, що описує час (години, хвилини, секунди),
@@ -55,22 +59,28 @@ document.addEventListener('DOMContentLoaded', () => {
         minutes: 10,
         seconds: 10,
         ShowTime() {
-            alert(`Час ${this.hours}:${this.minutes}:${this.seconds}`);
+            return(`Час ${this.hours}:${this.minutes}:${this.seconds}`);
         },
         AddSeconds() {
             let add_seconds = +prompt('Введіть кількість секунд');
-                this.seconds += add_seconds;
+            this.seconds += add_seconds;
             if(this.seconds < 60){
-                alert(`Час ${this.hours}:${this.minutes}:${this.seconds}`);
+                return this.ShowTime();
             }
             else if(this.seconds >= 60){
                 this.minutes += (this.seconds/60);
                 if(this.minutes < 60){
-                alert(`Час ${this.hours}:${Math.round(this.minutes)}:${this.seconds%60}`); 
+                //return(`Час ${this.hours}:${Math.round(this.minutes)}:${this.seconds%60}`); 
+                this.minutes = Math.round(this.minutes);
+                this.seconds = this.seconds%60;
+                return this.ShowTime();
                 }
                 else if(this.minutes >= 60){
                     this.hours += (this.minutes/60);
-                    alert(`Час ${Math.round(this.hours)}:${Math.round(this.minutes%60)}:${this.seconds%60}`);
+                    this.hours = Math.round(this.hours)
+                    this.minutes = Math.round(this.minutes%60)
+                    this.seconds = this.seconds%60;
+                    return this.ShowTime();
                 }
             }
             else return 'error';
@@ -79,16 +89,22 @@ document.addEventListener('DOMContentLoaded', () => {
             let add_minutes = +prompt('Введіть кількість хвилин');
             this.minutes += add_minutes;
             if(this.minutes < 60){
-                alert(`Час ${this.hours}:${this.minutes}:${this.seconds}`);
+                 return this.ShowTime();
             }
             else if(this.minutes >= 60){
                 this.hours += (this.minutes/60);
                 if(this.hours < 23){
-                    alert(`Час ${Math.round(this.hours)}:${Math.round(this.minutes%60)}:${this.seconds%60}`);
+                    this.hours = Math.round(this.hours)
+                    this.minutes = Math.round(this.minutes%60)
+                    this.seconds = this.seconds%60;
+                    return this.ShowTime();
                 }
                 else if(this.hours >= 24){
                     this.hours = this.hours % 24;
-                    alert(`Час ${Math.round(this.hours)}:${Math.round(this.minutes%60)}:${this.seconds%60}`);
+                    this.hours = Math.round(this.hours)
+                    this.minutes = Math.round(this.minutes%60)
+                    this.seconds = this.seconds%60;
+                    return this.ShowTime();
                 }
                 else return 'error';
             }
@@ -98,19 +114,25 @@ document.addEventListener('DOMContentLoaded', () => {
             let add_hours = +prompt('Введіть кількість годин');
             this.hours += add_hours;
             if(this.hours < 23){
-                alert(`Час ${Math.round(this.hours)}:${Math.round(this.minutes%60)}:${this.seconds%60}`);
+                this.hours = Math.round(this.hours)
+                this.minutes = Math.round(this.minutes%60)
+                this.seconds = this.seconds%60;
+                return this.ShowTime();
             }
             else if(this.hours >= 24){
                 this.hours = this.hours % 24;
-                alert(`Час ${Math.round(this.hours)}:${Math.round(this.minutes%60)}:${this.seconds%60}`);
+                this.hours = Math.round(this.hours);
+                this.minutes = Math.round(this.minutes%60);
+                this.seconds = this.seconds%60;
+                return this.ShowTime();
             }
             else return 'error';
         }
     }
-    time.ShowTime();
-    time.AddSeconds();
-    time.AddMinutes();
-    time.AddHours();
+    alert(time.ShowTime());
+    alert(time.AddSeconds());
+    alert(time.AddMinutes());
+    alert(time.AddHours());
 
 //maximum
 //1 Створи об'єкт, що описує звичайний дріб. Створи об'єкт, який має методи роботи з дробом:
